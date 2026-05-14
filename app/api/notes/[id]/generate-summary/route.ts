@@ -53,7 +53,8 @@ Response format:
       result = await model.generateContent(prompt);
     } catch (apiError: unknown) {
       console.error('Gemini API Error:', apiError);
-      return NextResponse.json({ error: 'AI service unavailable, try again shortly' }, { status: 503 });
+      const errorMsg = apiError instanceof Error ? apiError.message : 'Unknown API error';
+      return NextResponse.json({ error: `AI service unavailable: ${errorMsg}` }, { status: 503 });
     }
 
     const responseText = result.response.text();
