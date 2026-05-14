@@ -11,7 +11,16 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
-    const user = await prisma.user.findUnique({ where: { email } });
+    let user = await prisma.user.findUnique({ where: { email } });
+    
+    // Auto-provision demo account if someone tries to log in with it before signing up
+    if (!user && email === 'demo@example.com' && password === 'password123') {
+      const passwordHash = await bcrypt.hash('password123', 12);
+      user = await prisma.user.create({
+        data: { name: 'Demo User', email: 'demo@example.com', passwordHash },
+      });
+    }
+
     if (!user) {
       return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
     }

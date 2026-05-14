@@ -115,9 +115,8 @@ export default function SignupPage() {
             <button
               type="button"
               onClick={() => {
-                const randomId = Math.floor(Math.random() * 10000);
                 setName('Demo User');
-                setEmail(`demo${randomId}@example.com`);
+                setEmail('demo@example.com');
                 setPassword('password123');
               }}
               disabled={loading}
