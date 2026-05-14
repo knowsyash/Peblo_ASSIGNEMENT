@@ -29,7 +29,7 @@ export default function LoginPage() {
         throw new Error(json.error || 'Failed to login');
       }
 
-      router.push('/notes');
+      window.location.href = '/notes';
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message);

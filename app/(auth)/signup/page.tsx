@@ -30,7 +30,7 @@ export default function SignupPage() {
         throw new Error(json.error || 'Failed to sign up');
       }
 
-      router.push('/notes');
+      window.location.href = '/notes';
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message);
