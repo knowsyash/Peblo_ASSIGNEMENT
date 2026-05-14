@@ -64,7 +64,7 @@ Response format:
     let parsedResponse;
     try {
       parsedResponse = JSON.parse(cleanedText);
-    } catch (e) {
+    } catch {
       console.error("Failed to parse JSON:", cleanedText);
       return NextResponse.json({ error: 'AI returned invalid response' }, { status: 502 });
     }
@@ -99,11 +99,12 @@ Response format:
     ]);
 
     return NextResponse.json({ data: aiSummary });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('AI GENERATION ERROR:', error);
-    return NextResponse.json({
-      error: 'AI service error',
-      details: error.message
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    return NextResponse.json({ 
+      error: 'AI service error', 
+      details: errorMessage 
     }, { status: 503 });
   }
 }
