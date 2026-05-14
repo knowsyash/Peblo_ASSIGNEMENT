@@ -86,13 +86,27 @@ export default function LoginPage() {
             />
           </div>
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full py-3 px-4 bg-gradient-to-r from-indigo-500 to-cyan-500 hover:from-indigo-400 hover:to-cyan-400 text-white font-medium rounded-lg transition-all transform active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-indigo-500/25"
-          >
-            {loading ? 'Signing in...' : 'Sign In'}
-          </button>
+          <div className="flex flex-col gap-3">
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-3 px-4 bg-gradient-to-r from-indigo-500 to-cyan-500 hover:from-indigo-400 hover:to-cyan-400 text-white font-medium rounded-lg transition-all transform active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-indigo-500/25"
+            >
+              {loading ? 'Signing in...' : 'Sign In'}
+            </button>
+
+            <button
+              type="button"
+              onClick={() => {
+                setEmail('demo@example.com');
+                setPassword('password123');
+              }}
+              disabled={loading}
+              className="w-full py-3 px-4 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-medium rounded-lg transition-all transform active:scale-[0.98] disabled:opacity-50 border border-zinc-700"
+            >
+              Fill Demo Credentials
+            </button>
+          </div>
         </form>
 
         <p className="mt-6 text-center text-zinc-500 text-sm">
